@@ -5,5 +5,5 @@ Basic instructions for how to use Maven can be found here: https://maven.apache.
 You can ignore the part about creating a new project; the POM for Enchilada is included in the repo.
 
 To get the project into IntelliJ, you can choose to import the repo directory as an existing project.
-Choose to import it as a Maven project. All the default options are find, so just click through
+Choose to import it as a Maven project. All the default options are fine, so just click through
 until the project is imported. You should see the Maven toolbar pop up on the right side.
