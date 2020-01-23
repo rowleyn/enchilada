@@ -11,6 +11,7 @@ import java.util.*;
 
 import edu.carleton.enchilada.database.InfoWarehouse;
 import edu.carleton.enchilada.database.Database;
+import edu.carleton.enchilada.database.CreateTestDatabase;
 
 public class TSImportTest extends TestCase {
 	private String taskFile;
@@ -24,7 +25,7 @@ public class TSImportTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		new database.CreateTestDatabase();
+		new CreateTestDatabase();
 		db = Database.getDatabase("TestDB");
 		if (! db.openConnection("TestDB")) {
 			throw new Exception("Couldn't open DB con");

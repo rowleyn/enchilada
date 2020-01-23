@@ -57,7 +57,9 @@ import javax.swing.event.TableModelEvent;
 
 import edu.carleton.enchilada.ATOFMS.CalInfo;
 
-
+import edu.carleton.enchilada.ATOFMS.ATOFMSParticle;
+import edu.carleton.enchilada.ATOFMS.PeakParams;
+import edu.carleton.enchilada.collection.Collection;
 import edu.carleton.enchilada.database.InfoWarehouse;
 import edu.carleton.enchilada.database.Database;
 import edu.carleton.enchilada.errorframework.DisplayException;
@@ -293,8 +295,8 @@ public class ATOFMSDataSetImporterTest extends TestCase {
 	public void testReadParFileAndCreateEmptyCollection() {
 		try {
 			importer.parFile = new File((String)table.getValueAt(0,1));
-			ATOFMS.ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", true);
-			ATOFMS.ATOFMSParticle.currPeakParams = new ATOFMS.PeakParams(10, 20, .1f, .5f);			
+			ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", true);
+			ATOFMSParticle.currPeakParams = new PeakParams(10, 20, .1f, .5f);
 		}
 		catch (java.io.IOException ex) {
 			fail("Couldn't set necessary files to create empty collection");
@@ -342,7 +344,7 @@ public class ATOFMSDataSetImporterTest extends TestCase {
 		}
 		
 		try {
-			ATOFMS.ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", false);
+			ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", false);
 			importer.readParFileAndCreateEmptyCollection();
 		}
 		catch (java.io.IOException ex) {
@@ -408,11 +410,11 @@ public class ATOFMSDataSetImporterTest extends TestCase {
 		try {
 			try {
 				importer.parFile = new File((String)table.getValueAt(0,1));
-				ATOFMS.ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", true);
-				ATOFMS.ATOFMSParticle.currPeakParams = new ATOFMS.PeakParams(10, 20, .1f, .5f);
+				ATOFMSParticle.currCalInfo = new CalInfo("testRow\\b\\cal.cal", true);
+				ATOFMSParticle.currPeakParams = new PeakParams(10, 20, .1f, .5f);
 				importer.numParticles = new int[1];
 				importer.numParticles[0] = 10;
-				importer.collections = new collection.Collection[1];
+				importer.collections = new Collection[1];
 				importer.id = 
 					db.createEmptyCollectionAndDataset("ATOFMS", 0, "b", 
 							"comment", "'null', 'null', 10, 10, 0.005, 1");

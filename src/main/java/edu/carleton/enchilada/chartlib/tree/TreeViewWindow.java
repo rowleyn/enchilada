@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections15.Transformer;
 
 import edu.carleton.enchilada.collection.Collection;
 

@@ -76,6 +76,7 @@ import edu.carleton.enchilada.ATOFMS.CalInfo;
 import edu.carleton.enchilada.ATOFMS.ParticleInfo;
 import edu.carleton.enchilada.ATOFMS.Peak;
 import edu.carleton.enchilada.analysis.BinnedPeakList;
+import edu.carleton.enchilada.analysis.SubSampleCursor;
 import edu.carleton.enchilada.atom.ATOFMSAtomFromDB;
 
 /**
@@ -1330,7 +1331,7 @@ public class DatabaseTest extends TestCase {
 	// other cursor tests are.
 	public void testSubSampleCursor() {
 		db.openConnection(dbName);
-		CollectionCursor curs = new analysis.SubSampleCursor(
+		CollectionCursor curs = new SubSampleCursor(
 				db.getRandomizedCursor(db.getCollection(2)),0,5);	
 		testCursor(curs);	
 		db.closeConnection();
@@ -1340,7 +1341,7 @@ public class DatabaseTest extends TestCase {
 	
 	public void testSubSampleCursor2() throws Exception {
 		db.openConnection(dbName);
-		CollectionCursor curs = new analysis.SubSampleCursor(
+		CollectionCursor curs = new SubSampleCursor(
 				db.getRandomizedCursor(db.getCollection(2)),0,10);	
 
 		ArrayList<ParticleInfo> partInfo = new ArrayList<ParticleInfo>();
@@ -2105,7 +2106,7 @@ public class DatabaseTest extends TestCase {
 		db.openConnection(dbName);
 		
 		//test with default data
-		collection.Collection[] colls = new collection.Collection[1];
+		Collection[] colls = new Collection[1];
 		colls[0] = db.getCollection(2);
 		
 		java.util.Calendar min = java.util.Calendar.getInstance();
@@ -2148,7 +2149,7 @@ public class DatabaseTest extends TestCase {
 		assertEquals(formatter.format(max.getTime()), "9/12/2003 03:30:38 PM");
 		
 		//try on multiple collections
-		colls = new collection.Collection[2];
+		colls = new Collection[2];
 		colls[0] = db.getCollection(3);
 		colls[1] = db.getCollection(2);
 		
