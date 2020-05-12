@@ -92,6 +92,7 @@ public class ErrorLogger {
 		}
 		
 		file = new File("errorframework"+File.separator+"ErrorLogs"+File.separator+"ErrorLog"+constructDate()+".txt");
+		//file = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"errorframework"+File.separator+"ErrorLogs"+File.separator+"ErrorLog"+constructDate()+".txt");
 		System.out.println("Generating new error log: " + file.toString());
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.write("ErrorLog: started @ "+constructDate()+"\n");

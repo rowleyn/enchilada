@@ -89,7 +89,8 @@ public class SQLServerDatabase extends Database
 	 * TODO: change security model
 	 */
 	public boolean openConnection() {
-
+		//TODO-POSTGRES
+		/*
 		return openConnectionImpl(
 				"net.sourceforge.jtds.jdbc.Driver",
 				//Use this string to connect to the default SQL Server 2005 instance
@@ -98,17 +99,37 @@ public class SQLServerDatabase extends Database
 				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;databaseName=SpASMSdb;SelectMethod=cursor;",
 				"SpASMS",
 				"finally");
+		*/
+		return openConnectionImpl(
+				"net.sourceforge.jtds.jdbc.Driver",
+				"jdbc:postgresql://localhost/SpASMSdb",
+				//Use this string to connect to a SQL Server Express instance
+				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;databaseName=SpASMSdb;SelectMethod=cursor;",
+				"postgres",
+				"finally");
+		//TODO-POSTGRES
 	}
 	public boolean openConnection(String s) {
+		//TODO-POSTGRES
+		/*
 		return openConnectionImpl(
 				"net.sourceforge.jtds.jdbc.Driver",
 				//Use this string to connect to the default SQL Server 2005 instance
 				"jdbc:jtds:sqlserver://localhost;databaseName="+s+";SelectMethod=cursor;",
 				//Use this string to connect to a SQL Server Express instance
-			//	"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;databaseName="+s+";SelectMethod=cursor;",
+				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;databaseName="+s+";SelectMethod=cursor;",
 				"SpASMS",
 				"finally");
-		
+		*/
+		return openConnectionImpl(
+				"net.sourceforge.jtds.jdbc.Driver",
+				//Use this string to connect to the default SQL Server 2005 instance
+				"jdbc:postgresql://localhost/"+s+"",
+				//Use this string to connect to a SQL Server Express instance
+				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;databaseName="+s+";SelectMethod=cursor;",
+				"postgres",
+				"finally");
+		//TODO-POSTGRES
 	}
 	/**
 	 * Open a connection to a MySQL database:
@@ -116,7 +137,8 @@ public class SQLServerDatabase extends Database
 	 * TODO: change security model
 	 */
 	public boolean openConnectionNoDB() {
-
+		//TODO-POSTGRES
+		/*
 		return openConnectionImpl(
 				"net.sourceforge.jtds.jdbc.Driver",
 				//Use this string to connect to the default SQL Server 2005 instance
@@ -125,8 +147,16 @@ public class SQLServerDatabase extends Database
 				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;SelectMethod=cursor;",
 				"SpASMS",
 				"finally");
-		
-		
+		*/
+		return openConnectionImpl(
+				"net.sourceforge.jtds.jdbc.Driver",
+				//Use this string to connect to the default SQL Server 2005 instance
+				"jdbc:postgresql://localhost/",
+				//Use this string to connect to a SQL Server Express instance
+				//"jdbc:jtds:sqlserver://localhost;instance=SQLEXPRESS;SelectMethod=cursor;",
+				"postgres",
+				"finally");
+		//TODO-POSTGRES
 	}
 	
 	/**

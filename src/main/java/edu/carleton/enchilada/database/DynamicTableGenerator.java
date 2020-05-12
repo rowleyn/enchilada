@@ -2,6 +2,7 @@ package edu.carleton.enchilada.database;
 
 import edu.carleton.enchilada.errorframework.ErrorLogger;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -54,7 +55,9 @@ public class DynamicTableGenerator extends DefaultHandler {
 		if ((systemId != null && systemId.endsWith("meta.dtd"))
 				|| (publicId != null && publicId.endsWith("meta.dtd"))) {
 			// the current directory is the application install directory.  yay!
-			return new InputSource(new FileInputStream("importation files\\meta.dtd"));
+			//return new InputSource(new FileInputStream("importation files\\meta.dtd"));
+			//return new InputSource(new FileInputStream("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"importation files"+File.separator+"meta.dtd"));
+			return new InputSource(new FileInputStream("importation files"+File.separator+"meta.dtd"));
 		} else {
 			return null;
 		}

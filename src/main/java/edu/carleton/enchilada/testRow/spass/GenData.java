@@ -37,21 +37,25 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-package edu.carleton.enchilada.testRow.ams;
+package testRow.spass;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
- * Used to generate AMS test data
- * @author shaferia
+ * Used to generate SPASS test data
+ * @author rzeszotj based off of shaferia
  */
 public class GenData {
 	//should messages be output when files are overwritten?
 	private boolean warn_overwrite;
 	//the location to save data
-	private static String THISLOC = "testRow"+File.separator+"ams"+File.separator+"";
-	//private static String THISLOC = ("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testRow"+File.separator+"ams"+File.separator);
-
+	public static final int[] peakVals = {10,20,30,40,50,60,70,80,99};
+	private static String THISLOC = "testRow/spass/";
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private File f;
+	
 	/**
 	 * Use for one-time generation of data
 	 * @param args	not used.
@@ -61,32 +65,31 @@ public class GenData {
 		d.warn_overwrite = true;
 
 		int items = 20;
-		int mzlen = 20;
+		int mzmin = -10;
+		int mzmax = 10;
+		long tstart = 3114199800l;
+		long tdelta = 600;
 		
-		d.writeData("Test", items, mzlen, new int[]{2, 5, 6});
-		d.writeTimeSeries("TS", items, 3114199800l, 600);
-		d.writeMZ("mz", mzlen);
+		d.writeData("Test", items, mzmin, mzmax, tstart, tdelta, new int[]{2, 5, 6});
 	}
 	
 	/**
-	 * Generate sample AMS data
-	 * @param items	the number of AMS items to write
-	 * @param mzlen	the maximum in the range of m/z values to consider
-	 * @param peaks	a list containing the m/z values at which AMS items should have peaks (in range 1..mzlen)
+	 * Generate sample SPASS data
+	 * @param items	the number of SPASS items to write
+	 * @param mzmin the minimum in the range of m/z valued to consider
+	 * @param mzmax	the maximum in the range of m/z values to consider
+	 * @param peaks	a list containing the m/z values at which SPASS items should have peaks (in range 1..mzlen)
 	 * @param tstart	the time at which to start the particle timeseries
-	 * @param tdelta	the fixed timestep for the particle timeseries
-	 * @param fnames	names of the files to generate: {datasetname, timeseriesname, mzname}
+	 * @param tdelta	the change in time per particle
 	 * @return relative pathnames of the files created: {datasetname, timeseriesname, mzname}
 	 */
 	public static String[] generate(
-			String[] fnames, int items, int mzlen, int[] peaks, long tstart, long tdelta) {
+			String[] fnames, int items, int mzmin, int mzmax, int[] peaks, long tstart, long tdelta) {
 		GenData d = new GenData();
 		d.warn_overwrite = false;
 		
-		d.writeData(fnames[0], items, mzlen, peaks);
-		d.writeTimeSeries(fnames[1], items, tstart, tdelta);
-		d.writeMZ(fnames[2], mzlen);
-		
+		d.writeData(fnames[0], items, mzmin, mzmax, tstart, tdelta, peaks);
+
 		for (int i = 0; i < fnames.length; ++i)
 			fnames[i] = THISLOC + fnames[i] + ".txt";
 		
@@ -99,7 +102,7 @@ public class GenData {
 	 * @return a PrintWriter on file fname
 	 */
 	private PrintWriter getWriter(String fname) {
-		File f = new File(THISLOC + fname);
+		f = new File(THISLOC + fname);
 		
 		if (warn_overwrite && f.exists())
 			System.out.printf("Warning: file %s already exists; overwriting.\n", fname);
@@ -115,73 +118,71 @@ public class GenData {
 	}
 	
 	/**
-	 * Write the 2D matrix data file for the AMS test data
+	 * Write the 2D matrix data file for the SPASS test data
 	 * @param name	the dataset name (name and first line of file)
-	 * @param items	the number of AMS items to write to the file
-	 * @param mzlen	the number of m/z values in the data
+	 * @param items	the number of SPASS items to write to the file
+	 * @param mzmin	the minimum of m/z values in the data
+	 * @param mzmax the maximum of m/z values in the data
+	 * @param tstart the starting time for particles
+	 * @param tdelta the change in time between particles
 	 * @param peaks	the m/z values at which to write non-negative values
+	 * 
 	 */
-	public void writeData(String name, int items, int mzlen, int[] peaks) {
+	public void writeData(String name, int items, int mzmin, int mzmax, long tstart, long tdelta, int[] peaks) {
 		PrintWriter file = getWriter(name + ".txt");
-		file.println(name);
+		//File header
 		
-		//peak values to write (sequentially)
-		double[] peakVals = {0.1, 0.2, 0.3, 0.4, 0.5};
+		file.print("Filename\t");
+		file.print("Date\t");
+		file.print("Acquisition #\t");
+		file.print("µm Diameter\t");
+		//Peak positions
+		for (int i = mzmin; i <= mzmax; i++)
+			file.print(i+"\t");
+		file.println();
+		
 		// the value to write for no peak
-		int nothing = -999;
+		int nothing = 0;
 		
-		for (int i = 0; i < items; ++i) {
-			int k = 1;
-			for (int j = 0; j < peaks.length; ++j) {
-				for (;k < peaks[j]; ++k) {
-					file.print(nothing);
-					file.print("\t");
+		String fileLoc = "C:/abcd/"+name+".txt\t";
+		Date tempDate;
+		for (int i = 0; i < items; i++) {//Loop through particles
+			tempDate = new Date(tstart);
+			tstart += tdelta;
+			//Fill in particle header
+			file.print(fileLoc);
+			file.print(dateFormat.format(tempDate) + "\t");
+			file.print(i+1+"\t");
+			double t = (double)(i)/10;
+			file.print(t+"\t");
+			
+			//Fill in peak values
+			boolean peaked = false;
+			for (int k = mzmin; k <= mzmax; k++){
+				for (int j = 0; j < peaks.length && !peaked; j++) {
+					if (k == peaks[j]) {
+						file.print(peakVals[j%peakVals.length]+"\t");
+						peaked = true;
+					}	
 				}
-				file.print(peakVals[(i * peaks.length + j) % peakVals.length]);
-				file.print("\t");
-				k++;
+				if (!peaked){
+					if (k == mzmax)
+						file.print(nothing);
+					else
+						file.print(nothing+"\t");
+				}					
+				peaked = false;
 			}
-			for (;k <= mzlen; ++k) {
-				file.print(nothing);
-				file.print("\t");
-			}
+			//End the particle line
 			file.println();
 		}
-		file.close();
-	}
-	
-	/**
-	 * Write the time series
-	 * @param name	the name of the time series (name and first line of file)
-	 * @param items	the number of AMS items written to the data file
-	 * @param tstart	the starting time of the time series
-	 * @param tdelta	the difference between sequential times
-	 */
-	public void writeTimeSeries(String name, int items, long tstart, long tdelta) {
-		PrintWriter file = getWriter(name + ".txt");
-		file.println(name);
 		
-		for (int i = 0; i < items; ++i) {
-			file.println(tstart);
-			tstart += tdelta;
+		try{Scanner test = new Scanner(f);
+			while(test.hasNext())
+			{System.out.println(test.nextLine());}
+			System.out.println("test");
 		}
-		
-		file.close();
-	}
-	
-	/**
-	 * Write the m/z file
-	 * @param name	the name of the m/z list (name and first line of file)
-	 * @param mzlen the length of the m/z list (starts at 1, ends at mzlen)
-	 */
-	public void writeMZ(String name, int mzlen) {
-		PrintWriter file = getWriter(name + ".txt");
-		file.println(name);
-		
-		for (int i = 1; i <= mzlen; ++i) {
-			file.println(i);
-		}
-		
+		catch(Exception e){}
 		file.close();
 	}
 }

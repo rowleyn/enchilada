@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- WARNING: changes to this file will cause Enchilada to break. -->
+
+<!ELEMENT metadata (datasetinfo, atominfodense, atominfosparse)>
+	<!-- The metadata element MUST have a datatype associated with it -->
+	<!ATTLIST metadata datatype CDATA #REQUIRED>
+	
+<!ELEMENT datasetinfo (field*)>
+
+<!ELEMENT atominfodense (field*)>
+
+<!ELEMENT atominfosparse (field*)>
+	
+<!ELEMENT field (#PCDATA)>
+	<!-- Attributes are the type of data in that field, and whether or not it is
+	a primary key - used for the AIS table.  -->
+	<!ATTLIST field 
+					type CDATA #REQUIRED
+			  		primaryKey (true | false) "false"
+	>

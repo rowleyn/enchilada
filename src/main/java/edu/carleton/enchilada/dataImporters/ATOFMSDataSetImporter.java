@@ -224,7 +224,7 @@ public class ATOFMSDataSetImporter {
 				processDataSet();
 				readParFileAndCreateEmptyCollection();
 				readSpectraAndCreateParticle();
-				
+
 			} catch (IOException e) {
 				//e.printStackTrace();
 				ErrorLogger.writeExceptionToLog("Importing","File "+name+

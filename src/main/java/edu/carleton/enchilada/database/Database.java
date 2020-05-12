@@ -151,7 +151,10 @@ public abstract class Database implements InfoWarehouse {
 	 * @return an InfoWarehouse backed by a relational database
 	 */
 	public static InfoWarehouse getDatabase(String dbName) {
-		return new SQLServerDatabase(dbName);
+		//TODO-POSTGRES
+		//return new SQLServerDatabase(dbName);
+		return  new PostgreSQLDatabase(dbName);
+		//TODO-POSTGRES
 	}
 	public String getDatabaseName(){
 		return database;
@@ -161,7 +164,10 @@ public abstract class Database implements InfoWarehouse {
 	 * @return an InfoWarehouse backed by a relational database
 	 */
 	public static InfoWarehouse getDatabase() {
-		return new SQLServerDatabase();
+		//TODO-POSTGRES
+		//return new SQLServerDatabase();
+		return  new PostgreSQLDatabase();
+		//TODO-POSTGRES
 	}
 	
 	/**
@@ -407,7 +413,9 @@ public abstract class Database implements InfoWarehouse {
 		public BulkInserter(BatchExecuter stmt, String table) {
 			super(stmt, table);
 			try {
-				tempFile = File.createTempFile("bulkfile", ".txt");
+				//tempFile = File.createTempFile("bulkfile", ".txt");
+				//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+				tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 				tempFile.deleteOnExit();
 				file = new BufferedWriter(new FileWriter(tempFile));
 			}
@@ -471,7 +479,9 @@ public abstract class Database implements InfoWarehouse {
 			table = tableName;
 
 			try {
-				tempFile = File.createTempFile(table, ".txt");
+				//tempFile = File.createTempFile(table, ".txt");
+				//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+table+".txt");
+				tempFile = new File("TEMP"+File.separator+"table"+".txt");
 				tempFile.deleteOnExit();
 				file = new BufferedWriter(new FileWriter(tempFile));
 			}
@@ -688,9 +698,12 @@ public abstract class Database implements InfoWarehouse {
 			db = Database.getDatabase("");
 			db.openConnectionNoDB();
 			Statement stmt = db.getCon().createStatement();
-			stmt.executeUpdate("create database " + dbName);
-			String sql = "ALTER DATABASE "+dbName+" SET RECOVERY SIMPLE";
-			stmt.executeUpdate(sql);
+			//TODO-POSTGRES
+			//stmt.executeUpdate("create database " + dbName);
+			stmt.executeUpdate("create database \"" + dbName + "\"");
+			//String sql = "ALTER DATABASE "+dbName+" SET RECOVERY SIMPLE";
+			//stmt.executeUpdate(sql);
+			//TODO-POSTGRES
 			stmt.close();
 		} catch (SQLException e) {
 			ErrorLogger.writeExceptionToLogAndPrompt(db.getName(),"Error rebuilding database.");
@@ -707,7 +720,10 @@ public abstract class Database implements InfoWarehouse {
 			db = Database.getDatabase(dbName);
 			db.openConnection(dbName);
 			con = db.getCon();
-			in = new Scanner(new File("SQLServerRebuildDatabase.txt"));
+			//TODO-POSTGRES
+			//in = new Scanner(new File("SQLServerRebuildDatabase.txt"));
+			in = new Scanner(new File("PostgreSQLRebuildDatabase.txt"));
+			//TODO-POSTGRES
 			String query = "";
 			StringTokenizer token;
 			// loop through license block
@@ -725,7 +741,7 @@ public abstract class Database implements InfoWarehouse {
 			
 			while (in.hasNext()) {
 				query = in.nextLine();
-				//System.out.println(query);
+				System.out.println(query);
 				con.createStatement().executeUpdate(query);
 			}
 			
@@ -767,9 +783,18 @@ public abstract class Database implements InfoWarehouse {
 			if (db.isPresent()) {
 				con = db.getCon();
 				Statement stmt = con.createStatement();
-				stmt.executeUpdate("drop database " + dbName);
+				//TODO-POSTGRES
+				//stmt.executeUpdate("drop database " + dbName);
+				stmt.executeUpdate("drop database \"" + dbName + "\"");
+				//TODO-POSTGRES
 				stmt.close();
 			}
+			//TODO-POSTGRES
+			con = db.getCon();
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("DROP DATABASE IF EXISTS \"" + dbName + "\"");
+			stmt.close();
+			//TODO-POSTGRES
 		} catch (SQLException e) {
 			ErrorLogger.writeExceptionToLogAndPrompt(db.getName(),"Error dropping database.");
 			System.err.println("Error in dropping database.");
@@ -1842,7 +1867,9 @@ public abstract class Database implements InfoWarehouse {
 			if (url.equals("localhost")) {
 				PrintWriter bulkFile = null;
 				try {
-					tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));
 				} catch (IOException e) {
@@ -2118,7 +2145,9 @@ public abstract class Database implements InfoWarehouse {
 			bulkInsertFileWriter = null;
 			alteredCollections = new ArrayList<Integer>();
 			try {
-				bulkInsertFile = File.createTempFile("bulkfile", ".txt");
+				//bulkInsertFile = File.createTempFile("bulkfile", ".txt");
+				//bulkInsertFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+				bulkInsertFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 				bulkInsertFile.deleteOnExit();
 				bulkInsertFileWriter = new PrintWriter(new FileWriter(bulkInsertFile));
 			} catch (IOException e) {
@@ -4849,7 +4878,9 @@ public abstract class Database implements InfoWarehouse {
 				if (url.equals("localhost")) {
 					PrintWriter bulkFile = null;
 					try {
-						tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
 					} catch (IOException e) {
@@ -4966,7 +4997,9 @@ public abstract class Database implements InfoWarehouse {
 			if (url.equals("localhost")) {
 				PrintWriter bulkFile = null;
 				try {
-					tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));
 				} catch (IOException e) {
@@ -5261,7 +5294,9 @@ public abstract class Database implements InfoWarehouse {
 				if (url.equals("localhost")) {
 					PrintWriter bulkFile = null;
 					try {
-						tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
 					} catch (IOException e) {
@@ -5379,7 +5414,9 @@ public abstract class Database implements InfoWarehouse {
 				if (url.equals("localhost")) {
 					PrintWriter bulkFile = null;
 					try {
-						tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = File.createTempFile("bulkfile", ".txt");
+						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
 					} catch (IOException e) {
@@ -6396,7 +6433,9 @@ public abstract class Database implements InfoWarehouse {
 			if (url.equals("localhost")) {
 				PrintWriter bulkFile = null;
 				try {
-					tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = File.createTempFile("bulkfile", ".txt");
+					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
+					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));
 				} catch (IOException e) {

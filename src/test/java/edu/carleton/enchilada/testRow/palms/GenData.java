@@ -52,7 +52,8 @@ public class GenData {
 	//should messages be output when files are overwritten?
 	private boolean warn_overwrite;
 	//the location to save data
-	private static String THISLOC = "testRow/PALMS/";
+	private static String THISLOC = "testRow"+File.separator+"PALMS"+File.separator+"";
+	//private static String THISLOC = ("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testRow"+File.separator+"PALMS"+File.separator);
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	private File f;
 	

@@ -37,7 +37,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-package edu.carleton.enchilada.testRow.ams;
+package testRow.ams;
 
 import java.io.*;
 
@@ -49,9 +49,8 @@ public class GenData {
 	//should messages be output when files are overwritten?
 	private boolean warn_overwrite;
 	//the location to save data
-	private static String THISLOC = "testRow"+File.separator+"ams"+File.separator+"";
-	//private static String THISLOC = ("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testRow"+File.separator+"ams"+File.separator);
-
+	private static String THISLOC = "testRow/ams/";
+	
 	/**
 	 * Use for one-time generation of data
 	 * @param args	not used.
