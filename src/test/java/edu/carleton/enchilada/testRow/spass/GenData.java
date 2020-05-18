@@ -53,7 +53,6 @@ public class GenData {
 	//the location to save data
 	public static final int[] peakVals = {10,20,30,40,50,60,70,80,99};
 	private static String THISLOC = "testRow"+File.separator+"spass"+File.separator+"";
-	//private static String THISLOC = ("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testRow"+File.separator+"spass"+File.separator);
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	private File f;
 	

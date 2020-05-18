@@ -414,7 +414,6 @@ public abstract class Database implements InfoWarehouse {
 			super(stmt, table);
 			try {
 				//tempFile = File.createTempFile("bulkfile", ".txt");
-				//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 				tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 				tempFile.deleteOnExit();
 				file = new BufferedWriter(new FileWriter(tempFile));
@@ -480,7 +479,6 @@ public abstract class Database implements InfoWarehouse {
 
 			try {
 				//tempFile = File.createTempFile(table, ".txt");
-				//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+table+".txt");
 				tempFile = new File("TEMP"+File.separator+"table"+".txt");
 				tempFile.deleteOnExit();
 				file = new BufferedWriter(new FileWriter(tempFile));
@@ -741,7 +739,7 @@ public abstract class Database implements InfoWarehouse {
 			
 			while (in.hasNext()) {
 				query = in.nextLine();
-				System.out.println(query);
+				//System.out.println(query);
 				con.createStatement().executeUpdate(query);
 			}
 			
@@ -1868,7 +1866,6 @@ public abstract class Database implements InfoWarehouse {
 				PrintWriter bulkFile = null;
 				try {
 					//tempFile = File.createTempFile("bulkfile", ".txt");
-					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));
@@ -2146,7 +2143,6 @@ public abstract class Database implements InfoWarehouse {
 			alteredCollections = new ArrayList<Integer>();
 			try {
 				//bulkInsertFile = File.createTempFile("bulkfile", ".txt");
-				//bulkInsertFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 				bulkInsertFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 				bulkInsertFile.deleteOnExit();
 				bulkInsertFileWriter = new PrintWriter(new FileWriter(bulkInsertFile));
@@ -4879,7 +4875,6 @@ public abstract class Database implements InfoWarehouse {
 					PrintWriter bulkFile = null;
 					try {
 						//tempFile = File.createTempFile("bulkfile", ".txt");
-						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
@@ -4998,7 +4993,6 @@ public abstract class Database implements InfoWarehouse {
 				PrintWriter bulkFile = null;
 				try {
 					//tempFile = File.createTempFile("bulkfile", ".txt");
-					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));
@@ -5295,7 +5289,6 @@ public abstract class Database implements InfoWarehouse {
 					PrintWriter bulkFile = null;
 					try {
 						//tempFile = File.createTempFile("bulkfile", ".txt");
-						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
@@ -5415,7 +5408,6 @@ public abstract class Database implements InfoWarehouse {
 					PrintWriter bulkFile = null;
 					try {
 						//tempFile = File.createTempFile("bulkfile", ".txt");
-						//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 						tempFile.deleteOnExit();
 						bulkFile = new PrintWriter(new FileWriter(tempFile));
@@ -6434,7 +6426,6 @@ public abstract class Database implements InfoWarehouse {
 				PrintWriter bulkFile = null;
 				try {
 					//tempFile = File.createTempFile("bulkfile", ".txt");
-					//tempFile = new File("C:"+File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile = new File("TEMP"+File.separator+"bulkfile"+".txt");
 					tempFile.deleteOnExit();
 					bulkFile = new PrintWriter(new FileWriter(tempFile));

@@ -87,7 +87,6 @@ public class ClusterQueryTest extends TestCase {
 		PrintWriter pw;
 		try {
 			pw = new PrintWriter("testClust"+File.separator+"q"+File.separator+"par1.txt");
-			//pw = new PrintWriter("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testClust"+File.separator+"q"+File.separator+"par1.txt");;
 			pw.println(db.getATOFMSFileName(2));
 			ArrayList<Peak> peaks = db.getPeaks(db.getAtomDatatype(2), 2);		
 
@@ -102,7 +101,6 @@ public class ClusterQueryTest extends TestCase {
 		
 		try {
 			pw = new PrintWriter("testClust"+File.separator+"q"+File.separator+"par2.txt");
-			//pw = new PrintWriter("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testClust"+File.separator+"q"+File.separator+"par2.txt");;
 			pw.println(db.getATOFMSFileName(3));
 			ArrayList<Peak> peaks = db.getPeaks(db.getAtomDatatype(3), 3);		
 
@@ -132,8 +130,6 @@ public class ClusterQueryTest extends TestCase {
 		
 		filenamesGood.add("testClust"+File.separator+"q"+File.separator+"par1.txt");
 		filenamesGood.add("testClust"+File.separator+"q"+File.separator+"par2.txt");
-		//filenamesGood.add("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testClust"+File.separator+"q"+File.separator+"par1.txt");
-		//filenamesGood.add("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testClust"+File.separator+"q"+File.separator+"par2.txt");
 
 		qc = new ClusterQuery(
 					cID,db, "Cluster Query", "GoodTest", false, filenamesGood,d);
@@ -150,7 +146,6 @@ public class ClusterQueryTest extends TestCase {
 		ArrayList<String> filenamesNoClusters = new ArrayList<String>();
 		
 		filenamesNoClusters.add("testClust"+File.separator+"q"+File.separator+"par3.txt");
-		//filenamesNoClusters.add("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testClust"+File.separator+"q"+File.separator+"par3.txt");
 
 		qc = new ClusterQuery(
 				cID,db, "Cluster Query", "NoTest", false, filenamesNoClusters,d);

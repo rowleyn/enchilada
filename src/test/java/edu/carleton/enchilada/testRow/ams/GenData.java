@@ -50,7 +50,6 @@ public class GenData {
 	private boolean warn_overwrite;
 	//the location to save data
 	private static String THISLOC = "testRow"+File.separator+"ams"+File.separator+"";
-	//private static String THISLOC = ("C:"+ File.separator+"Users"+File.separator+"t-del"+File.separator+"Desktop"+File.separator+"enchilada"+File.separator+"src"+File.separator+"main"+File.separator+"java"+File.separator+"edu"+File.separator+"carleton"+File.separator+"enchilada"+File.separator+"testRow"+File.separator+"ams"+File.separator);
 
 	/**
 	 * Use for one-time generation of data
